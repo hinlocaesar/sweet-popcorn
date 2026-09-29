@@ -29,7 +29,7 @@
 
   --ink: #10182F;
   --ink-soft: #3B4568;
-  --muted: #66708F;
+  --muted: #5F6986;
   --line: rgba(16, 24, 47, 0.11);
   --line-strong: rgba(16, 24, 47, 0.2);
 
@@ -159,7 +159,7 @@ p:last-child { margin-bottom: 0; }
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--red-600);
   margin-bottom: 1rem;
 }
 .eyebrow::before {
@@ -204,6 +204,21 @@ p:last-child { margin-bottom: 0; }
 .section--dark h2,
 .section--dark h3,
 .section--dark h4 { color: #fff; }
+
+/* ...but a light card nested in a dark section is its own island: its
+   headings and body copy must stay dark or they vanish on the white card.
+   `.card--dark` is deliberately translucent and keeps its light text. */
+.section--dark .product__body h3,
+.section--dark .step h3,
+.section--dark .card:not(.card--dark) h3,
+.section--dark .card:not(.card--dark) h4 { color: var(--navy-900); }
+
+.section--dark .product,
+.section--dark .step,
+.section--dark .card:not(.card--dark) { color: var(--ink); }
+
+.section--dark .included { color: rgba(255, 255, 255, 0.78); }
+.section--dark .muted { color: rgba(255, 255, 255, 0.72); }
 .section--dark .lead { color: rgba(255, 255, 255, 0.76); }
 
 .section-head { max-width: 720px; margin-bottom: clamp(2rem, 1rem + 3vw, 3.25rem); }
@@ -291,13 +306,13 @@ p:last-child { margin-bottom: 0; }
   align-items: center;
   gap: 0.45em;
   font-weight: 700;
-  color: var(--red);
-  border-bottom: 2px solid rgba(217, 35, 43, 0.28);
+  color: var(--red-600);
+  border-bottom: 2px solid rgba(183, 23, 30, 0.32);
   padding-bottom: 2px;
   transition: gap 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 .link-arrow::after { content: "→"; transition: transform 0.25s var(--ease); }
-.link-arrow:hover { gap: 0.75em; border-color: var(--red); }
+.link-arrow:hover { gap: 0.75em; border-color: var(--red-600); }
 .section--dark .link-arrow { color: var(--gold); border-color: rgba(247, 201, 72, 0.4); }
 .section--dark .link-arrow:hover { border-color: var(--gold); }
 
@@ -461,7 +476,7 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.42em;
-  color: var(--red);
+  color: var(--red-600);
   text-transform: uppercase;
   margin-top: 3px;
   padding-left: 2px;
@@ -482,7 +497,7 @@ p:last-child { margin-bottom: 0; }
   white-space: nowrap;
 }
 .nav__link:hover { background: rgba(16, 24, 47, 0.06); }
-.nav__link.is-active { color: var(--red); }
+.nav__link.is-active { color: var(--red-600); }
 .nav__link.is-active::after {
   content: "";
   position: absolute;
@@ -542,7 +557,7 @@ p:last-child { margin-bottom: 0; }
 }
 .dropdown a span { font-weight: 400; font-size: 0.8rem; color: var(--muted); }
 .dropdown a:hover { background: var(--butter-50); padding-left: 1.05rem; }
-.dropdown a.is-active { color: var(--red); }
+.dropdown a.is-active { color: var(--red-600); }
 
 .header-cta { display: flex; align-items: center; gap: 0.6rem; }
 
@@ -981,6 +996,8 @@ p:last-child { margin-bottom: 0; }
   object-fit: cover;
 }
 .split__media--tall img { aspect-ratio: 3 / 4; }
+/* Screenshots and documents keep their own ratio - cropping them cuts content. */
+.split__media--fit img { aspect-ratio: auto; object-fit: contain; }
 .split__note {
   position: absolute;
   bottom: -22px;
@@ -1452,7 +1469,9 @@ p:last-child { margin-bottom: 0; }
 
 /* Label artwork has to stay readable, so fit the whole label in the card. */
 .nutrition-card--contain img { object-fit: contain; object-position: center; background: var(--shell); }
-.nutrition-card.label-card { background: var(--navy-900); border-color: rgba(255, 255, 255, 0.14); }
+.nutrition-card.label-card { background: var(--navy-900); border-color: rgba(255, 255, 255, 0.14); color: #fff; }
+.nutrition-card.label-card .nutrition-card__cap { border-top-color: rgba(255, 255, 255, 0.16); }
+.nutrition-card.label-card .nutrition-card__cap span { color: rgba(255, 255, 255, 0.72); }
 .nutrition-card.label-card img {
   aspect-ratio: 4 / 3;
   object-fit: contain;
