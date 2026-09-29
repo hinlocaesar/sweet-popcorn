@@ -54,6 +54,31 @@ py -3 -m http.server 8765
 # then open http://127.0.0.1:8765/index.html
 ```
 
+## Hosting on GitHub Pages
+
+The site is live at **https://hinlocaesar.github.io/sweet-popcorn/**.
+
+Pages is enabled for this repository as *Deploy from a branch → `main` / root*,
+so publishing is just a push:
+
+```powershell
+powershell -File tools\build.ps1     # regenerate the pages
+powershell -File tools\validate.ps1  # sanity-check them
+git add -A ; git commit -m "Update site" ; git push
+```
+
+The first build after a push takes about 30–60 seconds. `.nojekyll` is included
+so GitHub serves the files as-is instead of running them through Jekyll.
+
+### Pointing sweetmagicpopcorn.com at it
+
+1. Add a `CNAME` file containing `sweetmagicpopcorn.com` (or set the domain in
+   the repository's *Settings → Pages → Custom domain*).
+2. At your DNS registrar, point the domain at `hinlocaesar.github.io` —
+   an `A` record per GitHub's published IPs for the apex, or a `CNAME` for `www`.
+3. Tick *Enforce HTTPS* once the DNS check passes.
+4. Keep the old URLs working by adding the redirect table below at the same time.
+
 ## Design notes
 
 - **Direction:** playful & premium — carnival marquee bulbs, red gingham,
