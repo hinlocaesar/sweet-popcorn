@@ -1,0 +1,11 @@
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*.log
+
+# tooling
+node_modules/
+__pycache__/
+.venv/
